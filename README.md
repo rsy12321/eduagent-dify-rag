@@ -10,7 +10,11 @@ Dify 工作流已冻结并导出为 [eduagent-assistant.yml](dify/eduagent-assis
 
 ## 演示视频
 
-[eduagent-demo.mp4](docs/demo/eduagent-demo.mp4)（约 90 秒，无配音，中文字幕）
+下载原文件：[eduagent-demo.mp4](docs/demo/eduagent-demo.mp4)
+
+
+https://github.com/user-attachments/assets/5cef60e0-af17-4651-b7c6-4cc764d58037
+
 
 内容依次为：README 与架构图 → Dify 工作流（分类路由、出题/审题双 Agent）→ 通过 Spring Boot 流式接口演示答疑、出题、知识库外问题拒答、诱导编造拒绝 → 4 轮评测记录。终端演示使用 [scripts/demo.sh](scripts/demo.sh)，等待模型回复的片段做了加速处理。
 
