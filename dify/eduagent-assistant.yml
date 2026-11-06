@@ -1,0 +1,479 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: advanced-chat
+  name: eduagent-assistant
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/siliconflow:0.0.64@6cf29a175480b384dcada3791849b2c30dfcff5d4ad2ee4b7eeb0dcd7c2b817f
+    version: null
+kind: app
+site:
+  chat_color_theme: null
+  chat_color_theme_inverted: false
+  copyright: null
+  custom_disclaimer: ''
+  default_language: en-US
+  description: null
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  input_placeholder: null
+  privacy_policy: null
+  show_workflow_steps: true
+  title: eduagent-assistant
+  use_icon_as_answer_icon: false
+version: 0.7.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload: {}
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: question-classifier
+      id: 1793862323149-source-1793862345286-target
+      selected: false
+      source: '1793862323149'
+      sourceHandle: source
+      target: '1793862345286'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1793862345286-1-1793863219788-target
+      selected: false
+      source: '1793862345286'
+      sourceHandle: '1'
+      target: '1793863219788'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1793863219788-source-1793863240901-target
+      selected: false
+      source: '1793863219788'
+      sourceHandle: source
+      target: '1793863240901'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1793863240901-source-1793863250672-target
+      selected: false
+      source: '1793863240901'
+      sourceHandle: source
+      target: '1793863250672'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1793862345286-2-1793864422844-target
+      selected: false
+      source: '1793862345286'
+      sourceHandle: '2'
+      target: '1793864422844'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1793864422844-source-1793864432065-target
+      selected: false
+      source: '1793864422844'
+      sourceHandle: source
+      target: '1793864432065'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: llm
+      id: 1793864432065-source-1793874232120-target
+      selected: false
+      source: '1793864432065'
+      sourceHandle: source
+      target: '1793874232120'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1793874232120-source-1793864446312-target
+      source: '1793874232120'
+      sourceHandle: source
+      target: '1793864446312'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: User Input
+        type: start
+        variables: []
+      height: 73
+      id: '1793862323149'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        classes:
+        - id: '1'
+          label: 答疑
+          name: '  学生询问概念、原理、公式、现象解释或解题思路；以及任何不是要求出题的问题'
+        - id: '2'
+          label: 出题
+          name: '  用户要求出题、生成练习题、选择题、判断题、简答题或测验'
+        model:
+          completion_params:
+            enable_thinking: false
+            temperature: 0.1
+          mode: chat
+          name: Qwen/Qwen3-8B
+          provider: langgenius/siliconflow/siliconflow
+        query_variable_selector:
+        - '1793862323149'
+        - sys.query
+        selected: false
+        title: Question Classifier
+        type: question-classifier
+        vision:
+          enabled: false
+      height: 178
+      id: '1793862345286'
+      position:
+        x: 382
+        y: 282
+      positionAbsolute:
+        x: 382
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        dataset_ids:
+        - O89kZb+jkwgcHDGz4KZbeQdLA0M4v5GPwkUKMtU+ymf9Tg2Q5o2PB0k4oUffW4uM
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: BAAI/bge-reranker-v2-m3
+            provider: langgenius/siliconflow/siliconflow
+          score_threshold: null
+          top_k: 3
+        query_attachment_selector: []
+        query_variable_selector:
+        - '1793862323149'
+        - sys.query
+        retrieval_mode: multiple
+        selected: false
+        title: Knowledge Retrieval
+        type: knowledge-retrieval
+      height: 90
+      id: '1793863219788'
+      position:
+        x: 696.0245950413223
+        y: 240.37897520661164
+      positionAbsolute:
+        x: 696.0245950413223
+        y: 240.37897520661164
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1793863219788'
+          - result
+        model:
+          completion_params:
+            temperature: 0.3
+          mode: chat
+          name: Qwen/Qwen3-30B-A3B-Instruct-2507
+          provider: langgenius/siliconflow/siliconflow
+        prompt_template:
+        - edition_type: basic
+          id: d51afa3d-210b-4d8e-aa94-b6218b442f6f
+          role: system
+          text: '你是初中物理助教，只能依据「参考资料」回答学生问题。
+
+            规则：
+
+            1. 只使用参考资料中的内容作答，不得用自己的知识补充资料之外的内容。
+
+            2. 如果参考资料与问题无关或不足以回答，只回复：“知识库中没有找到相关内容，无法回答。目前知识库只包含初中力学讲义。”不得编造公式、定律或出处。
+
+            3. 用户要求编造内容时，明确拒绝。
+
+            4. 先给结论，再用 1–3 句话说明理由。问题涉及多个对象、多个参照物或多种情况时，必须逐一分别给出结论，不得只给一个笼统结论；理由必须来自参考资料，不得自行推出资料中没有的原因。
+
+
+            参考资料：{{#context#}}'
+        - id: e2c04d75-f890-472e-b569-ca2e8aca74e6
+          role: user
+          text: '{{#sys.query#}}'
+        selected: false
+        title: LLM
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1793863240901'
+      position:
+        x: 999.0266446280991
+        y: 240.37897520661164
+      positionAbsolute:
+        x: 999.0266446280991
+        y: 240.37897520661164
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        answer: '{{#1793863240901.text#}}'
+        selected: false
+        title: 答疑回复
+        type: answer
+        variables: []
+      height: 103
+      id: '1793863250672'
+      position:
+        x: 1300.0245950413223
+        y: 240.37897520661164
+      positionAbsolute:
+        x: 1300.0245950413223
+        y: 240.37897520661164
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        dataset_ids:
+        - O89kZb+jkwgcHDGz4KZbeQdLA0M4v5GPwkUKMtU+ymf9Tg2Q5o2PB0k4oUffW4uM
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: BAAI/bge-reranker-v2-m3
+            provider: langgenius/siliconflow/siliconflow
+          score_threshold: null
+          top_k: 5
+        query_attachment_selector: []
+        query_variable_selector:
+        - '1793862323149'
+        - sys.query
+        retrieval_mode: multiple
+        selected: false
+        title: Knowledge Retrieval 2
+        type: knowledge-retrieval
+      height: 90
+      id: '1793864422844'
+      position:
+        x: 696.0245950413223
+        y: 486.6187768595042
+      positionAbsolute:
+        x: 696.0245950413223
+        y: 486.6187768595042
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1793864422844'
+          - result
+        model:
+          completion_params:
+            temperature: 0.5
+          mode: chat
+          name: Qwen/Qwen3-30B-A3B-Instruct-2507
+          provider: langgenius/siliconflow/siliconflow
+        prompt_template:
+        - id: e6a60fdd-98be-4309-9541-c8e46a84e5af
+          role: system
+          text: "  你是初中物理出题助手，只能依据「参考资料」出题。\n  规则：\n  1. 题目内容必须来自参考资料，不得超出资料范围。参考资料只要包含所问考点需要的概念、条件或结论，就必须出题；只有资料完全不涉及所问考点时，才只回复：“知识库中没有足够的相关内容，无法出题。”\n\
+            \  2. 严格遵守用户要求的题型、题量和限制条件（例如“不出计算题”）；用户未指定题量时默认 3 道。\n  3. 每道题后附【答案】和【解析】，解析\
+            \ 1–2 句，说明依据。\n  4. 选择题每题 4 个选项（A–D），只有 1 个正确答案；判断题答案写“正确”或“错误”，错误的说法要给出改正。\n\
+            \  5. 题目条件完整、表述严谨，不得出现有歧义或有多个正确答案的题目。\n  6. 用户指定了多个考点时，每个考点各出一题；题目之间的考点和设问不得重复。\n\
+            \  7. 选择题出完后逐个选项自查：除正确答案外，其余选项必须在题设条件下明确错误；若某选项在某些条件下也成立，必须改写该选项或补全题干条件。\n\
+            \  8. 解析引用的依据必须是参考资料中直接支撑该结论的原理，不得引用不相关的定律。\n  9. 判断题答案为“正确”时，不写【改正】。\n\
+            \  10. 公式用纯文本书写（如 v = s / t），不得使用 LaTeX 或 $ 符号。\n  参考资料：{{#context#}}"
+        - id: 0d6650b1-5e43-4d0a-9fdd-77b87513ef31
+          role: user
+          text: '{{#sys.query#}}'
+        selected: false
+        title: 出题草稿
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1793864432065'
+      position:
+        x: 999.0266446280991
+        y: 486.6187768595042
+      positionAbsolute:
+        x: 999.0266446280991
+        y: 486.6187768595042
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        answer: '{{#1793874232120.text#}}'
+        selected: false
+        title: 出题回复
+        type: answer
+        variables: []
+      height: 103
+      id: '1793864446312'
+      position:
+        x: 1609.6579173553719
+        y: 486.6187768595042
+      positionAbsolute:
+        x: 1609.6579173553719
+        y: 486.6187768595042
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1793864422844'
+          - result
+        model:
+          completion_params:
+            temperature: 0.2
+          mode: chat
+          name: Qwen/Qwen2.5-72B-Instruct
+          provider: langgenius/siliconflow/siliconflow
+        prompt_template:
+        - id: c17dcf15-3d30-4f55-ab3e-273d1706dac5
+          role: system
+          text: '你是初中物理试题审核员。你会收到：用户的出题要求、出题助手的草稿、参考资料。请逐题审核草稿，输出修正后的最终题目。
+
+            审核清单（逐题执行）：
+
+            1. 考点覆盖：对照用户要求，检查题量、题型，以及每个指定考点是否各有一题。缺失的考点必须补出题目；考了用户未要求内容的题目必须替换。
+
+            2. 题设成立：题干中的条件和情境必须符合参考资料中的物理事实，例如受力分析是否正确、力是否作用在所述物体上。题设不成立的题目必须重写。
+
+            3. 唯一答案：选择题逐个选项判断，除正确答案外，其余选项在题设条件下必须明确错误。对容易产生歧义的表述要补全条件，例如“密度”要说明是平均密度还是材料密度，“浸入”要说明是浸没还是部分浸入。
+
+            4. 答案与解析：答案必须正确；解析依据必须来自参考资料，并且与结论对应。
+
+            5. 格式：保持原有格式（题目、【答案】、【解析】，判断题答案为“错误”时含【改正】）；公式用纯文本，不用 LaTeX。
+
+            输出要求：只输出最终题目，不输出审核过程，不说明修改了哪里。若草稿为“知识库中没有足够的相关内容，无法出题。”，并且参考资料确实不涉及所问考点，原样输出这句话。
+
+
+            参考资料：{{#context#}}'
+        - id: ca82615b-b0a8-4350-8257-b3c637d0fabe
+          role: user
+          text: '【用户要求】
+
+            {{#sys.query#}}
+
+
+            【出题草稿】
+
+            {{#1793864432065.text#}}'
+        selected: false
+        title: 审题
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1793874232120'
+      position:
+        x: 1300.0245950413223
+        y: 486.6187768595042
+      positionAbsolute:
+        x: 1300.0245950413223
+        y: 486.6187768595042
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    viewport:
+      x: -1261.6180390604382
+      y: -62.018111638954906
+      zoom: 0.9979546054367907
+  rag_pipeline_variables: []

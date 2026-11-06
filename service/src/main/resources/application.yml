@@ -1,0 +1,42 @@
+server:
+  address: ${SERVER_ADDRESS:127.0.0.1}
+  port: ${SERVER_PORT:8080}
+  error:
+    include-message: never
+    include-stacktrace: never
+spring:
+  main:
+    web-application-type: servlet
+  datasource:
+    url: ${DB_URL:jdbc:mysql://192.168.191.7:3309/eduagent?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate.jdbc.time_zone: UTC
+  flyway:
+    enabled: true
+    placeholders:
+      tableOptions: ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+eduagent:
+  citations:
+    refusal-prefixes: ${CITATION_REFUSAL_PREFIXES:知识库中没有找到相关内容,知识库中没有足够的相关内容}
+  dify:
+    base-url: ${DIFY_BASE_URL:http://192.168.191.7:8090/v1}
+    api-key: ${DIFY_API_KEY}
+    connect-timeout: ${DIFY_CONNECT_TIMEOUT:5s}
+    blocking-timeout: ${DIFY_BLOCKING_TIMEOUT:120s}
+    stream-timeout: ${DIFY_STREAM_TIMEOUT:180s}
+  evaluation:
+    questions-path: ${EVAL_QUESTIONS_PATH:../eval/questions.json}
+    reports-dir: ${EVAL_REPORTS_DIR:../eval/reports}
+    interval: ${EVAL_INTERVAL:1s}
+logging:
+  level:
+    org.springframework.web: WARN
+    reactor.netty.http.client: OFF
+    org.hibernate.SQL: OFF
+    org.hibernate.orm.jdbc.bind: OFF

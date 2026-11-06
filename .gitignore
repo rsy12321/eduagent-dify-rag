@@ -1,0 +1,11 @@
+.DS_Store
+.env
+service/.env
+.env.*
+!.env.example
+target/
+*.log
+*.ifpkg
+.idea/
+*.iml
+__pycache__/
